@@ -20,8 +20,8 @@
  *
  * @package    local
  * @subpackage reservasalas
- * @copyright  2014 Francisco García Ralph (francisco.garcia.ralph@gmail.com)
- * 					Nicolás Bañados Valladares (nbanados@alumnos.uai.cl)
+ * @copyright  2014 Francisco GarcÃ­a Ralph (francisco.garcia.ralph@gmail.com)
+ * 					NicolÃ¡s BaÃ±ados Valladares (nbanados@alumnos.uai.cl)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ require_once(dirname(__FILE__) . '/../../config.php'); //obligatorio
 require_once($CFG->dirroot.'/local/reservasalas/forms.php');
 require_once($CFG->dirroot.'/local/reservasalas/tablas.php');
 
-//Código para setear contexto, url, layout
+//CÃ³digo para setear contexto, url, layout
 global $PAGE, $CFG, $OUTPUT, $DB;
 require_login();
 $url = new moodle_url('/local/reservasalas/edificios.php'); 
@@ -43,16 +43,16 @@ if(!has_capability('local/reservasalas:administration', $context)) {
 		print_error(get_string('INVALID_ACCESS','Reserva_Sala'));
 }
 
-//Para advertencia de módulos mal escritos
+//Para advertencia de mÃ³dulos mal escritos
 $warning = '';
 
 //Rescatamos la ACTION, pueden ser: ver, editar, borrar, agregar, crear.
-//Cada ACTION mostrara una version de la pagina la cual varia según lo que el usuario utilice
-//Por defecto el ACTION es ver, de manera que se mostrara una tabla con todos los módulos que existen.
+//Cada ACTION mostrara una version de la pagina la cual varia segÃºn lo que el usuario utilice
+//Por defecto el ACTION es ver, de manera que se mostrara una tabla con todos los mÃ³dulos que existen.
 $action = optional_param('action', 'ver', PARAM_TEXT);
 
 //Comprueba que existan sede, ya que los edificios se encuentran dentro de las sedes.
-//Ejemplo sede peñalolen tiene el edificio A, B, C, D y E.
+//Ejemplo sede peÃ±alolen tiene el edificio A, B, C, D y E.
 if(!$DB->get_records('reservasalas_edificios')){
 	$sedes=1;
 	if(!$DB->get_records('reservasalas_sedes')){
@@ -60,7 +60,7 @@ if(!$DB->get_records('reservasalas_edificios')){
 		$sedes=0;
 	}
 	if($action=='ver'){
-		//Se modifica el ACTION si no existen sede para mostrar un mensaje acorde a la situación.
+		//Se modifica el ACTION si no existen sede para mostrar un mensaje acorde a la situaciÃ³n.
 	$action = "sinsedes";
 	}
 }
@@ -86,7 +86,7 @@ if($action == 'editar'){
 		$sedesArray[$value->id]=$value->nombre;
 	}
 	
-	//Recuperar los módulos
+	//Recuperar los mÃ³dulos
 	$moduledatas = $DB->get_records('reservasalas_modulos', array('edificio_id'=>$idbuilding));
 	$stringmodules=array();
 	foreach($moduledatas as $key=>$value){	
@@ -98,7 +98,7 @@ if($action == 'editar'){
 	//si se cancela la edicion, que muestre la vista normal. Tabla con todos los edificios
 	if ($editform->is_cancelled()) {
 		$action = 'ver';
-	//si se acepto la edición, capturo los datos introducidos	
+	//si se acepto la ediciÃ³n, capturo los datos introducidos	
 	}else if ($fromform = $editform->get_data()) {
      
         $hiddenid= optional_param('buildingid',0,PARAM_INT);
@@ -109,7 +109,7 @@ if($action == 'editar'){
 			$modulesArray=array();
 			$modulesArray = explode('#', $explode);
 			$steps=array();
-			// se crea arreglo con todos lo modulos del edificio que se ingresaron en la edición
+			// se crea arreglo con todos lo modulos del edificio que se ingresaron en la ediciÃ³n
 			foreach($modulesArray as $moduleArray){			
 				$steps[]=$moduleArray;		
 			}
@@ -203,7 +203,7 @@ if($action== 'borrar'){
 
 // Se crea un edificio nuevo 
 if($action== 'crear'){
-	// Formulario de creción
+	// Formulario de creciÃ³n
 	$crearedificio = new createBuildingTwoAdminRoom();
 	if ($crearedificio->is_cancelled()) {
 		$action= 'ver';
@@ -265,8 +265,7 @@ if($action == 'editar'){
 	
 	$o= '';
 	$title = get_string('editbuilding', 'local_reservasalas');
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+	$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add(get_string('seeandmodbuildings', 'local_reservasalas'), 'edificios.php');
 	$PAGE->navbar->add($title, '');
 	$PAGE->set_title($title);
@@ -292,8 +291,7 @@ if($action == 'editar'){
 	$toprow[] = new tabobject(get_string('resources', 'local_reservasalas'), new moodle_url('/local/reservasalas/resources.php'), get_string('resources', 'local_reservasalas'));
 	
 	$title = get_string('seeandmodbuildings', 'local_reservasalas');
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+    $PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add($title, 'edificios.php');
 	$PAGE->set_title($title);
 	$PAGE->set_heading($title);
@@ -310,8 +308,7 @@ if($action == 'editar'){
 }else if($action== 'crear'){
 	$o = '';
 	$title = get_string('createbuildings', 'local_reservasalas');
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+    $PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add(get_string('seeandmodbuildings', 'local_reservasalas'), 'edificios.php');
 	$PAGE->navbar->add($title);
 	$PAGE->set_title($title);
