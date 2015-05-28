@@ -9,8 +9,14 @@
  /**
 local/reservasalas.php
 */
-
+$string['manageusers'] = 'Users Management';
+$string['unblocked'] = 'Unblocked';
+$string['blocked'] = 'Blocked';
+$string['reunionreserve'] = 'Set a Meeting';
+$string['reunionmyreunions'] = 'Meeting List';
 $string['activateadvanceoptions'] = 'Enable advanced options';
+$string['admin'] = 'Administration';
+$string['adminmenu'] = 'Administration Options';
 $string['addend'] = 'Add end';
 $string['adjustments'] = 'Adjustments';
 $string['admincomment'] = 'Admin comment';
@@ -130,7 +136,7 @@ $string['reserveseliminated'] = 'Reservations successfully eliminated';
 $string['resource'] = 'Resource';
 $string['resourcename'] = 'Resource name';
 $string['resources'] = 'Resources';
-$string['reunion'] = 'Reunion';
+$string['reunion'] = 'Meetings';
 $string['room'] = 'Room';
 $string['roomcapacity'] = 'Room capacity';
 $string['roomedit'] = 'Edit room';
@@ -252,7 +258,7 @@ $string['noreservesarefound']= "No reserves are found with specifications";
 $string['changeto']= "Change to";
 $string['ithasbeenchanged']= "It has been successfully changed";
 $string['ithasbeenadded']= "It has been successfully added";
-$string['nochanges']= "No changes were made ​​since the action was canceled";
+$string['nochanges']= "No changes were made â€‹â€‹since the action was canceled";
 $string['doyouwanteditsite']= "Do you want to edit the site?";
 $string['doyouwantdeletesite']= 'Do you want to delete the site?<p><b style="color:red;">*This action will disable buildings and facilities associated with the site<b></p> ';
 $string['inserted']= "inserted <br>";
