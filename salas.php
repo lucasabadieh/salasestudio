@@ -20,15 +20,15 @@
  *
  * @package    local
  * @subpackage reservasalas
- * @copyright  2014 Francisco García Ralph (francisco.garcia.ralph@gmail.com)
- * 					Nicolás Bañados Valladares (nbanados@alumnos.uai.cl)
+ * @copyright  2014 Francisco GarcÃ­a Ralph (francisco.garcia.ralph@gmail.com)
+ * 					NicolÃ¡s BaÃ±ados Valladares (nbanados@alumnos.uai.cl)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(dirname(__FILE__) . '/../../config.php'); //obligatorio
 require_once($CFG->dirroot.'/local/reservasalas/forms.php');
 require_once($CFG->dirroot.'/local/reservasalas/tablas.php');
 
-//código para setear contexto, url, layout
+//cÃ³digo para setear contexto, url, layout
 global $PAGE, $CFG, $OUTPUT, $DB;
 require_login();
 $url = new moodle_url('/local/reservasalas/salas.php'); 
@@ -154,7 +154,7 @@ if($action == 'agregar'){
 		//vista action=informe, valida la informacion ingresada para la comprobacion de salas para posteriormente agregar a la DDBB
 		
 		
-		/*// Antes acá comprobaba si la sala ya existia, sino la agregaba a la DDBB
+		/*// Antes acÃ¡ comprobaba si la sala ya existia, sino la agregaba a la DDBB
 		$nocreada = '';
 		var_dump($agregarsalasform);
 		for ($i = 0; $i < $fromform->number; $i++) {
@@ -210,8 +210,7 @@ if($action == 'ver'){
 	$toprow[] = new tabobject(get_string('resources', 'local_reservasalas'), new moodle_url('/local/reservasalas/resources.php'), get_string('resources', 'local_reservasalas'));
 	
 	$title = get_string('seeandmodrooms', 'local_reservasalas');
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+	$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add(get_string('seeandmodrooms', 'local_reservasalas'), 'salas.php');
 	$PAGE->set_title($title);
 	$PAGE->set_heading($title);
@@ -235,8 +234,7 @@ if($action == 'ver'){
 
 	$o = '';
 	$title = get_string('seeandmodrooms', 'local_reservasalas');
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+	$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add(get_string('seeandmodrooms', 'local_reservasalas'), 'salas.php');
 	$PAGE->set_title($title);
 	$PAGE->set_heading($title);
@@ -254,8 +252,7 @@ if($action == 'ver'){
 }else if($action == 'crear'){
 	$o= '';
 	$title = get_string('roomscreates', 'local_reservasalas');
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+	$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add(get_string('seeandmodrooms', 'local_reservasalas'), '');
 	$PAGE->navbar->add($title, 'salas.php?action=crear');
 	$PAGE->set_title($title);
@@ -271,8 +268,7 @@ if($action == 'ver'){
 	$o = '';
 	
 	$title = get_string('roomscreates', 'local_reservasalas');
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+	$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add(get_string('seeandmodrooms', 'local_reservasalas'), 'salas.php');
 	$PAGE->navbar->add($title,'salas.php?action=crear' );
 	$PAGE->set_title($title);
@@ -293,8 +289,7 @@ if($action == 'ver'){
 }else if($action == 'editar'){
 	$o= '';
 	$title = get_string('roomedit', 'local_reservasalas');
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+	$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add(get_string('seeandmodrooms', 'local_reservasalas'), 'salas.php');
 	$PAGE->navbar->add($title, '');
 	$PAGE->set_title($title);
@@ -313,12 +308,11 @@ if($action == 'ver'){
 	$o .= $OUTPUT->footer();
 	
 
-}else if($action == 'informe'){ // nuevo action, informa sobre el resultado de la creación de salas
+}else if($action == 'informe'){ // nuevo action, informa sobre el resultado de la creaciÃ³n de salas
 	$o = '';
 	
 	$title = get_string('report', 'local_reservasalas');
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+	$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add(get_string('seeandmodrooms', 'local_reservasalas'), 'salas.php');
 	$PAGE->navbar->add(get_string('roomscreates', 'local_reservasalas'),'salas.php?action=crear' );
 	$PAGE->navbar->add($title,'salas.php?action=informe' );
@@ -389,8 +383,7 @@ if($action == 'ver'){
 	
 	
 	$title = get_string('seeandmodrooms', 'local_reservasalas');
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+	$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add(get_string('seeandmodrooms', 'local_reservasalas'), 'salas.php');
 	$PAGE->set_title($title);
 	$PAGE->set_heading($title);
