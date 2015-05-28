@@ -27,7 +27,7 @@ require_once(dirname(__FILE__) . '/../../config.php'); //obligatorio
 require_once($CFG->dirroot.'/local/reservasalas/forms.php');
 require_once($CFG->dirroot.'/local/reservasalas/tablas.php');
 
-//código para setear contexto, url, layout
+//cÃ³digo para setear contexto, url, layout
 global $PAGE, $CFG, $OUTPUT, $DB;
 require_login();
 $url = new moodle_url('/local/reservasalas/historial.php'); 
@@ -81,8 +81,7 @@ if($action == "ver"){
 //Vistas de los ACTION: ver y comentario
 $o = '';
 $title = get_string('bookinghistory', 'local_reservasalas');
-$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 $PAGE->navbar->add($title, 'historial.php');
 
 
@@ -92,7 +91,7 @@ if($action == "ver"){
 	$PAGE->set_heading($title);
 	$o.= $OUTPUT->header();
 	$o.= $OUTPUT->heading($title);
-	$o.= "versión 2013031400";
+	$o.= "versiÃ³n 2013031400";
 	$o.= "<right><h4> ".get_string('totalreserves', 'local_reservasalas')." ".$count."  </h4></right>";
 	$o.= "<div class='no-overflow'>";
 	$o .= html_writer::table($tabla);
