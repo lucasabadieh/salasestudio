@@ -20,8 +20,8 @@
  *
  * @package    local
  * @subpackage reservasalas
- * @copyright  2014 Francisco García Ralph (francisco.garcia.ralph@gmail.com)
- * 					Nicolás Bañados Valladares (nbanados@alumnos.uai.cl)
+ * @copyright  2014 Francisco GarcÃ­a Ralph (francisco.garcia.ralph@gmail.com)
+ * 					NicolÃ¡s BaÃ±ados Valladares (nbanados@alumnos.uai.cl)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ require_once(dirname(__FILE__) . '/../../config.php'); //obligatorio
 require_once($CFG->dirroot.'/local/reservasalas/forms.php');
 require_once($CFG->dirroot.'/local/reservasalas/tablas.php');
 
-//Código para setear contexto, url, layout
+//CÃ³digo para setear contexto, url, layout
 global $PAGE, $CFG, $OUTPUT, $DB;
 require_login();
 $url = new moodle_url('/local/reservasalas/misreservas.php'); 
@@ -131,7 +131,7 @@ if($action == 'confirmar'){
 	$hora=date('H:i');
 	//$o.= "Hora Actual:".$hora."<br>";
 	$o.=$OUTPUT->single_button('reservar.php', get_string('newbook', 'local_reservasalas')).'<br>'; //imprime link volver.
-	//$o.= "me falta el c��digo para confirmar y cancelar, arreglar formato fechas en todo el c��digo";
+	//$o.= "me falta el cï¿½ï¿½digo para confirmar y cancelar, arreglar formato fechas en todo el cï¿½ï¿½digo";
 	
 	$o.= "<br><p style=\"font-family:arial;color:red;\">".get_string('notes', 'local_reservasalas')."<br>
 	- ".get_string('inordertoregister', 'local_reservasalas').$OUTPUT->pix_icon('i/valid', get_string('confirm', 'local_reservasalas')).get_string('whichisvisible', 'local_reservasalas')."<br>
