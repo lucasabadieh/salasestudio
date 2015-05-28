@@ -27,7 +27,7 @@ require_once(dirname(__FILE__) . '/../../config.php'); //obligatorio
 require_once($CFG->dirroot.'/local/reservasalas/forms.php');
 require_once($CFG->dirroot.'/local/reservasalas/tablas.php');
 //cuarta prueba 
-//código para setear contexto, url, layout
+//cÃ³digo para setear contexto, url, layout
 global $PAGE, $CFG, $OUTPUT, $DB;
 require_login();
 $url = new moodle_url('/local/reservasalas/estadisticas.php');
@@ -44,8 +44,7 @@ if(!has_capability('local/reservasalas:bockinginfo', $context)) {
 
 $o = '';
 $title = get_string('statistics', 'local_reservasalas');
-$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 $PAGE->navbar->add($title, 'estadisticas.php');
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
@@ -64,7 +63,7 @@ $totalreservas = $DB->count_records('reservasalas_reservas');
 $totalvalidas = $DB->count_records('reservasalas_reservas', array('activa'=>1));
 $table->data[] = array(get_string('totalreserves', 'local_reservasalas'), $totalvalidas);
 
-//número de reservas realizadas por el administrador
+//nÃºmero de reservas realizadas por el administrador
 $admins = get_admins();
 $reservasdeadmin = 0;
 foreach ($admins as $admin){
@@ -73,7 +72,7 @@ foreach ($admins as $admin){
 }
 $table->data[] = array(get_string('reservationsadm', 'local_reservasalas'), $reservasdeadmin);
 
-//número de reservas de alumnos
+//nÃºmero de reservas de alumnos
 $table->data[] = array(get_string('reservesstudents', 'local_reservasalas'),$totalvalidas-$reservasdeadmin);
 
 //total reservas canceladas
