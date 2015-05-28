@@ -375,7 +375,7 @@ class tablas{
 					
 				$user=$DB->get_record('user', array('id'=>$data->alumno_id));
 				$module = $DB->get_record('reservasalas_modulos', array('id'=>$data->modulo));
-				$pieces=explode("",$module->nombre_modulo);
+				$pieces=explode("|",$module->nombre_modulo);
 				if(count($pieces)>1){
 				$module->nombre_modulo=$pieces[0].$pieces[1];
 				}
