@@ -20,15 +20,15 @@
  *
  * @package    local
  * @subpackage reservasalas
- * @copyright  2014 Francisco García Ralph (francisco.garcia.ralph@gmail.com)
- * 					Nicolás Bañados Valladares (nbanados@alumnos.uai.cl)
+ * @copyright  2014 Francisco GarcÃ­a Ralph (francisco.garcia.ralph@gmail.com)
+ * 					NicolÃ¡s BaÃ±ados Valladares (nbanados@alumnos.uai.cl)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(dirname(__FILE__) . '/../../config.php'); //obligatorio
 require_once($CFG->dirroot.'/local/reservasalas/forms.php');
 require_once($CFG->dirroot.'/local/reservasalas/tablas.php');
 
-//código para setear contexto, url, layout
+//cÃ³digo para setear contexto, url, layout
 global $PAGE, $CFG, $OUTPUT, $DB;
 require_login();
 $url = new moodle_url('/local/reservasalas/sedes.php'); 
@@ -120,8 +120,7 @@ if($action == 'editar'){
 	
 	$o= '';
 	$title = get_string('editcampus', 'local_reservasalas');
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+    $PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add(get_string('seeandmodplaces', 'local_reservasalas'), 'sedes.php');
 	$PAGE->navbar->add($title, '');
 	$PAGE->set_title($title);
@@ -148,8 +147,7 @@ if($action == 'editar'){
 	$toprow[] = new tabobject(get_string('resources', 'local_reservasalas'), new moodle_url('/local/reservasalas/resources.php'), get_string('resources', 'local_reservasalas'));
 	
 	$title = get_string('seeandmodplaces', 'local_reservasalas');																			
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+	$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add($title, 'sedes.php');
 	$PAGE->set_title($title);
 	$PAGE->set_heading($title);
@@ -165,8 +163,7 @@ if($action == 'editar'){
 }else if($action = "crear"){
 	$o= '';
 	$title = get_string('campuscreate', 'local_reservasalas');
-	$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-	$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
+	$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 	$PAGE->navbar->add(get_string('places', 'local_reservasalas'), 'sedes.php');
 	$PAGE->navbar->add($title);
 	$PAGE->set_title($title);
