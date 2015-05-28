@@ -25,7 +25,7 @@
  */
 
 
-//Página para bloquear alumnos.
+//PÃ¡gina para bloquear alumnos.
 //Pruebas git
 require_once(dirname(__FILE__) . '/../../config.php'); //obligatorio
 require_once($CFG->dirroot.'/local/reservasalas/forms.php');
@@ -42,7 +42,7 @@ $PAGE->set_pagelayout('standard');
 
 //Capabilities
 //Valida la capacidad del usuario de poder ver el contenido
-//En este caso solo administradores del módulo pueden ingresar
+//En este caso solo administradores del mÃ³dulo pueden ingresar
 if(!has_capability('local/reservasalas:blocking', $context)) {
 		print_error(get_string('INVALID_ACCESS','Reserva_Sala'));
 }
@@ -52,7 +52,8 @@ $PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'),'reservar.ph
 $PAGE->navbar->add(get_string('users', 'local_reservasalas'));
 $PAGE->navbar->add(get_string('blockstudent', 'local_reservasalas'),'bloquear.php');
 
-
+if($nombreusuario = null)
+{
 //Formulario para bloquear a un alumno
 $buscador = new buscadorUsuario(null);
 if($fromform = $buscador->get_data()){
@@ -71,6 +72,19 @@ if($fromform = $buscador->get_data()){
 		print_error("error");
 	}
 }
+}
+else {
+	$usuario = $DB->get_record('user',array('username'=>$nombreusuario));
+	$record = new stdClass();
+	$record->comentarios = $fromform->comentario;
+	$record->alumno_id = $usuario->id;
+	$record->estado = 1;
+	$record->fecha_bloqueo = date('Y-m-d');
+	$record->id_reserva = "";
+	
+	$DB->insert_record('reservasalas_bloqueados', $record);
+	$bloqueado = true;
+}
 
 //Se carga la pagina, ya sea el titulo, head y migas de pan.
 
@@ -84,7 +98,7 @@ $o .= $OUTPUT->heading($title);
 
 //Dependiendo si el correo institucional es correcto, y a la ves
 //El usuario no ha sidobloqueado, o el usuario ya se encontraba bloqueado,
-//Se desplegara la información correspondiente sobre éxito o fracaso de la operación
+//Se desplegara la informaciÃ³n correspondiente sobre Ã©xito o fracaso de la operaciÃ³n
 if(isset($bloqueado)){
 	$o.= get_string('thestudent', 'local_reservasalas').$usuario->firstname." ".$usuario->lastname.get_string('suspendeduntilthe', 'local_reservasalas').date('d-m-Y', strtotime("+ 3 days"));
 	$o .= $OUTPUT->single_button('bloquear.php', get_string('blockagain', 'local_reservasalas'));
