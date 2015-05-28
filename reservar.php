@@ -18,8 +18,8 @@
  *
  * @package local
  * @subpackage reservasalas
- * @copyright 2014 Francisco García Ralph (francisco.garcia.ralph@gmail.com)
- *            Nicolás Bañados Valladares (nbanados@alumnos.uai.cl)
+ * @copyright 2014 Francisco GarcÃ­a Ralph (francisco.garcia.ralph@gmail.com)
+ *            NicolÃ¡s BaÃ±ados Valladares (nbanados@alumnos.uai.cl)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -41,7 +41,13 @@ $PAGE->set_url ( $baseurl );
 $PAGE->set_pagelayout ( 'standard' );
 $PAGE->set_title ( get_string ( 'reserveroom', 'local_reservasalas' ) );
 $PAGE->set_heading ( get_string ( 'reserveroom', 'local_reservasalas' ) );
-$PAGE->navbar->add ( get_string ( 'roomsreserve', 'local_reservasalas' ) );
+//Revisa cual navbar poner, si es un administrador le pone admin,
+//en caso contrario, lo deja sin el admin y con "roombookings".
+if(has_capability('local/reservasalas:bockinginfo', $context)) {
+	$PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
+
+}else {$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));}
+
 $PAGE->navbar->add ( get_string ( 'reserverooms', 'local_reservasalas' ), 'reservar.php' );
 echo $OUTPUT->header (); // Imprime el header
 echo $OUTPUT->heading ( get_string ( 'reserveroom', 'local_reservasalas' ) );
