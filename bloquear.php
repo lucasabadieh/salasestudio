@@ -13,7 +13,8 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
+//2015 : Se agregan codigos necesarios para conectar esta pagina
+// con la pagina de administación.
 
 /**
  * 
@@ -21,6 +22,7 @@
  * @package    local
  * @subpackage reservasalas
  * @copyright  2013 Marcelo Epuyao
+ *             2015 Lucas Abadie
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -48,11 +50,11 @@ if(!has_capability('local/reservasalas:blocking', $context)) {
 }
 
 //Migas de pan
-$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'),'reservar.php');
-$PAGE->navbar->add(get_string('users', 'local_reservasalas'));
+$PAGE->navbar->add(get_string('admin', 'local_reservasalas'),'admin.php');
+$PAGE->navbar->add(get_string('users', 'local_reservasalas'),'usuarios.php');
 $PAGE->navbar->add(get_string('blockstudent', 'local_reservasalas'),'bloquear.php');
-
-if($nombreusuario = null)
+$nombreusuario = $_GET['nombreusuario'];
+if($nombreusuario == null)
 {
 //Formulario para bloquear a un alumno
 $buscador = new buscadorUsuario(null);
@@ -65,8 +67,21 @@ if($fromform = $buscador->get_data()){
 		$record->estado = 1;
 		$record->fecha_bloqueo = date('Y-m-d');
 		$record->id_reserva = ""; 
+	
+		$id = $usuario->id;
+		$bloqueo = $DB->get_record('reservasalas_bloqueados',array('alumno_id'=>$id));
+		if($bloqueo == null) {$DB->insert_record('reservasalas_bloqueados', $record);}
+		else {
+			$record = new stdClass();
+			$record->id = $bloqueo->id;
+			$record->id_reserva = $bloqueo->id_reserva;
+			$record->comentarios = $fromform->comentario;
+			$record->estado = 0;
+			
+			$DB->update_record('reservasalas_bloqueados', $record);
+			
+		} 
 		
-		$DB->insert_record('reservasalas_bloqueados', $record);
 		$bloqueado = true;
 	}else{
 		print_error("error");
@@ -75,14 +90,30 @@ if($fromform = $buscador->get_data()){
 }
 else {
 	$usuario = $DB->get_record('user',array('username'=>$nombreusuario));
-	$record = new stdClass();
-	$record->comentarios = $fromform->comentario;
-	$record->alumno_id = $usuario->id;
-	$record->estado = 1;
-	$record->fecha_bloqueo = date('Y-m-d');
-	$record->id_reserva = "";
 	
-	$DB->insert_record('reservasalas_bloqueados', $record);
+	
+	$id = $usuario->id;
+	$bloqueo = $DB->get_record('reservasalas_bloqueados',array('alumno_id'=>$id));
+	if($bloqueo == null) {
+		$record = new stdClass();
+		$record->comentarios = $fromform->comentario;
+		$record->alumno_id = $usuario->id;
+		$record->estado = 1;
+		$record->fecha_bloqueo = date('Y-m-d');
+		$record->id_reserva = "";
+		
+		$DB->insert_record('reservasalas_bloqueados', $record);}
+	else {
+		$record = new stdClass();
+		$record->id = $bloqueo->id;
+		$record->id_reserva = $bloqueo->id_reserva;
+		$record->comentarios = $fromform->comentario;
+		$record->estado = 1;
+			
+		$DB->update_record('reservasalas_bloqueados', $record);
+			
+	}
+	
 	$bloqueado = true;
 }
 
@@ -101,7 +132,7 @@ $o .= $OUTPUT->heading($title);
 //Se desplegara la informaciÃ³n correspondiente sobre Ã©xito o fracaso de la operaciÃ³n
 if(isset($bloqueado)){
 	$o.= get_string('thestudent', 'local_reservasalas').$usuario->firstname." ".$usuario->lastname.get_string('suspendeduntilthe', 'local_reservasalas').date('d-m-Y', strtotime("+ 3 days"));
-	$o .= $OUTPUT->single_button('bloquear.php', get_string('blockagain', 'local_reservasalas'));
+	$o .= $OUTPUT->single_button('usuarios.php', get_string('back', 'local_reservasalas'));
 }else{
 	//$o .= "<strong>Nombre:</strong> ".$usuario->firstname." ".$usuario->lastname;
 	ob_start();
@@ -112,4 +143,4 @@ if(isset($bloqueado)){
 
 $o .= $OUTPUT->footer();
 
-echo $o;
+echo $o; 
