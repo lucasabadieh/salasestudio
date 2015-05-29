@@ -85,9 +85,10 @@ foreach($users as $user) {
 	$usuario = $user->username;
 	
 	//$estado = new stdClass();
-	$id = $users->id;
+	$id = $user->id;
 	$alumno = $DB->get_record('reservasalas_bloqueados',array('alumno_id'=>$id));
 	$estado = $alumno->estado;
+	// echo $estado; echo ',';
 	if($estado == 1){ 
 		$estadofinal = get_string('blocked', 'local_reservasalas');
 	}else {$estadofinal = get_string('unblocked', 'local_reservasalas');}
