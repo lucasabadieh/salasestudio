@@ -10,6 +10,10 @@
 local/reservasalas.php
 */
 $string['manageusers'] = 'Administrar Usuarios';
+$string['user'] = 'Usuario';
+$string['email'] = 'Email';
+$string['status'] = 'Estado';
+$string['graphs'] = 'Gráficos';
 $string['unblocked'] = 'Desbloqueado';
 $string['blocked'] = 'Bloqueado';
 $string['reunionreserve'] = 'Agendar una Reunion';
