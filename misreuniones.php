@@ -144,4 +144,3 @@ if($action == 'confirmar'){
 }
 
 echo $o;
-
