@@ -52,18 +52,14 @@ $o = '';
 $title = get_string('admin', 'local_reservasalas');
 //$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
 //$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
-//A continuación se crean los navbar ejemplo: ( Home -> Administración ).
-$PAGE->navbar->add($title, 'admin.php');
+//A continuación se crean las migas de pan. Ejemplo: ( Home -> Administración ).
+$PAGE->navbar->add($title, 'admin.php'); 
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
 $title = get_string('adminmenu', 'local_reservasalas');
-//Aquí se crea el header de la página y se definen variables que pueden
-// ser utiles, como la fecha y la hora.
+//Aquí se crea el header de la página y la tabla que se usará.
 $o.= $OUTPUT->header();
 $o.= $OUTPUT->heading($title);
-$ahora = time();
-$fechahoy = date('Y-m-d'); 
-$modulo = modulo_hora($ahora);
 $table = new html_table();
 
 //De aquí en adelante se crea el menú del administrador.
