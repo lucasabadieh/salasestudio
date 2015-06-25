@@ -101,6 +101,11 @@ $table->data[] = array(get_string('studentblockedhistory', 'local_reservasalas')
 $totalbloqueados= $DB->get_records_sql("select * from {reservasalas_bloqueados} where estado=1 group by alumno_id");
 $table->data[] = array(get_string('studentblockpresent', 'local_reservasalas'), count($totalbloqueados));
 
+//graficos
+$string = 'Graphs';
+$pixicon = new pix_icon('i/scales', get_string($string, 'local_reservasalas'));
+$link = $OUTPUT->action_icon(new moodle_url("/local/reservasalas/graficos.php"), $pixicon);
+$table->data[] = array(get_string('graphs', 'local_reservasalas'), $link);
 
 
 $o.= html_writer::table($table);
