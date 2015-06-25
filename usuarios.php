@@ -50,21 +50,15 @@ if(!has_capability('local/reservasalas:bockinginfo', $context)) {
 //entre otros.
 $o = '';
 $title = get_string('users', 'local_reservasalas');
-//$PAGE->navbar->add(get_string('roomsreserve', 'local_reservasalas'));
-//$PAGE->navbar->add(get_string('adjustments', 'local_reservasalas'));
 //A continuación se crean los navbar ejemplo: ( Home -> Administración ).
 $PAGE->navbar->add(get_string('admin', 'local_reservasalas'), 'admin.php');
 $PAGE->navbar->add($title, 'usuarios.php');
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
 $title = get_string('users', 'local_reservasalas');
-//Aquí se crea el header de la página y se definen variables que pueden
-// ser utiles, como la fecha y la hora.
+//Aquí se crea el header de la página.
 $o.= $OUTPUT->header();
 $o.= $OUTPUT->heading(get_string('manageusers', 'local_reservasalas'));
-$ahora = time();
-$fechahoy = date('Y-m-d'); 
-$modulo = modulo_hora($ahora);
 $table = new html_table();
 
 //De aquí en adelante se crea la tabla con los usuarios.
@@ -81,9 +75,10 @@ $pixiconunbloc = new pix_icon('i/user', get_string('unblock', 'local_reservasala
 
 //Se crea la tabla.
 $users = $DB->get_records('user');
+$table->head = array(get_string('user', 'local_reservasalas'), get_string('email', 'local_reservasalas'),get_string('Status', 'local_reservasalas'), get_string('block', 'local_reservasalas'), get_string('unblock', 'local_reservasalas'));
 foreach($users as $user) {
 	$usuario = $user->username;
-	
+	$email = $user->email;
 	//$estado = new stdClass();
 	$id = $user->id;
 	$alumno = $DB->get_record('reservasalas_bloqueados',array('alumno_id'=>$id));
@@ -95,7 +90,7 @@ foreach($users as $user) {
 	
 	$block = $OUTPUT->action_icon(new moodle_url("/local/reservasalas/bloquear.php", array('nombreusuario'=>$usuario)), $pixiconbloc);
 	$unblock = $OUTPUT->action_icon(new moodle_url("/local/reservasalas/desbloquear.php", array('nombreusuario'=>$usuario)), $pixiconunbloc);
-	$table->data[] = array($usuario, $estadofinal, $block, $unblock);
+	$table->data[] = array($usuario, $email,$estadofinal, $block, $unblock);
 
 }
 
