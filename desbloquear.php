@@ -60,6 +60,10 @@ if($nombreusuario == null){
 if($fromform = $desbloquearform->get_data()){
 	//Si el formualario fue enviado y el alumno existe y ademas esta bloqueado, lo desbloqueara.
 	//De lo contrario mostrata mensajes acordes al error ocurrido.
+	//Desbloquea al usuario en la base de datos, Si se entra directo a la
+	// página mostrara un formulario para desbloquear al alumno, en cambio si
+	// el encargado selecciono a un alumno en la página de usuarios,
+	// será desbloqueado inmediatamente.
 	if($usuario = $DB->get_record('user',array('username'=>$fromform->usuario))){
 		$dateahora = date('Y-m-d');
 		if($bloqueo = $DB->get_record('reservasalas_bloqueados',array('alumno_id'=>$usuario->id,'estado'=>1))){//('reservasalas_bloqueados', array('alumno_id'=>$usuario->id));
@@ -121,3 +125,4 @@ if(isset($desbloqueado)){
 }
 $o .= $OUTPUT->footer();
 echo $o;
+?>
