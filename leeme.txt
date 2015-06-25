@@ -1,0 +1,68 @@
+***Plugin de moodle para reserva de salas de estudios.
+Este plugin contiene nuevas características y funciones 
+en relación al plugin antiguo de reserva de salas.
+Plugin de reserva de salas no oficial de webcursos.***
+
+Tabla de contenidos:
+I. Instalación
+II. Version log
+III. Contacto
+
+---------------------------------------------------------------------------------------------------------------------
+I. Instalación:
+
+1. Copie y pegue la carpeta "reservasalas" en la carpeta "local" contenida en su moodle-master. Su carpeta de moodle-master
+deberia ser la que esta en C:/xampp/htdocs.
+
+2. Copie y pegue la carpeta UAI en la carpeta "blocks" contenida en su moodle-master. Su carpeta de moodle-master
+deberia ser la que esta en C:/xampp/htdocs.
+
+3. Tras realizar estos pasos ingrese a su moodle (con xampp activado y apache y mysql andando), identifiquese con su
+cuenta de administrador. Vaya a "notifications" y deberia aparecer que moodle reconoce dos plugins nuevos y ponga
+aceptar y espere hasta que los instale.
+
+---------------------------------------------------------------------------------------------------------------------
+II. Version log:
+
+v1.0
+Versión original del plugin.
+
+v1.1.310515 - 31/05/15 
+======================
+Hasta la fecha se han creado las siguientes páginas .php:
+ - admin.php : Página que muestra las opciones que puede realizar el administrador.
+ - usuarios.php : Página que muestra los usuarios registrados en el moodle, junto con su nombre, mail
+                  y estado (bloqueado o desbloqueado) y también otorga la opción de bloquear o desbloquear
+                  al usuario.
+ - misreuniones.php, reuniones.php y reunion.php: Estas páginas son derivadas de las páginas de reservar.php 
+                y misreservas.php, con la diferencia en que en estas nuevas páginas se agenda y se muestran
+                las reservas de salas de reuniones, no de estudio.
+
+Se actualizaron las siguientes páginas:
+ - bloquear y desbloquear.php : Se agregaron una serie de códigos que permiten bloquear y desbloquear al alumno
+                                seleccionado anteriormente en la página de usuarios.php. Las páginas originales,
+                                permitian el bloqueo, pero solo aparecia un cuadro de texto en el que se ingresaba
+                                el nombre de usuario y lo bloqueaba o desbloqueaba respectivamente. Sin embargo,
+                                aparte de ser más incomodo que el nuevo, tenía un error que cuando se bloqueaba un
+                                alumnos, se insertaba un dato en una tabla de bloqueados y al desbloquearlo se
+                                actualizaba un dato, de esta forma, al cometer varios bloqueos se llegaba a
+                                una contradicción que tenía el mismo alumno con ambos estados, bloqueado y desbloqueado,
+                                lo cual también se arreglo.
+
+v1.2.030615 - 03/06/15
+======================
+Nuevas características:
+ - Los alumnos bloqueados no pueden reservar salas.
+ - Laa página de mis reuniones solo muestra reservas que corresponden a "salas de reunion".
+ - Nuevo : Gráfico en la página de estadísticas.
+ - Importante mejora de calidad de código de varios archivos.
+
+---------------------------------------------------------------------------------------------------------------------
+III. Contacto:
+Cualquier consulta o sugerencia a:
+Lucas Abadie Hagemann
+labadie@alumnos.uai.cl
+ o svelasquez@alumnos.uai.cl
+ o rmatos@alumnos.uai.cl
+
+---------------------------------------------------------------------------------------------------------------------
