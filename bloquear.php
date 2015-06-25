@@ -59,7 +59,10 @@ if($nombreusuario == null)
 //Formulario para bloquear a un alumno
 $buscador = new buscadorUsuario(null);
 if($fromform = $buscador->get_data()){
-	//Bloquea al usuario en la base de datos
+	//Bloquea al usuario en la base de datos, Si se entra directo a la
+	// página mostrara un formulario para bloquar al alumno, en cambio si
+	// el encargado selecciono a un alumno en la página de usuarios,
+	// será bloqueado inmediatamente.
 	if($usuario = $DB->get_record('user',array('username'=>$fromform->usuario))){
 		$record = new stdClass();
 		$record->comentarios = $fromform->comentario;
@@ -144,3 +147,4 @@ if(isset($bloqueado)){
 $o .= $OUTPUT->footer();
 
 echo $o; 
+?>
